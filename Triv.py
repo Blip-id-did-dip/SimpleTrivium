@@ -1,6 +1,8 @@
 from bitarray import bitarray
 from bitarray.util import zeros
 from get_bitstream import get_bitstream
+from algor import encrypt_file
+from algor import decrypt_file
 import secrets
 
 
@@ -9,17 +11,9 @@ import secrets
 key = bitarray()
 key.frombytes(b'ABCDEFGHJK')
 
-initial_value = bitarray()
-initial_value.frombytes(secrets.token_bytes(10))
 
-print('The length of the key is: ', len(key))
+filename = 'secretMessage.txt'
 
-streamA = bitarray()
-streamB = bitarray()
-
-streamA , streamB = get_bitstream(key, initial_value)
-
-print(streamA)
-print(streamB)
-
-
+encrypt_file(filename,'mySecret.enc',key)
+             
+decrypt_file('encrypted\mySecret.enc',key)
